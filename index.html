@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kelas XI.1 — Elvone.Word</title>
+
+  <!-- Google Font (opsional, but okay online) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1720;
+      --muted:#9aa6b2;
+      --accent:#4f8df7;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(79,141,247,0.06), transparent),
+                  radial-gradient(800px 400px at 90% 90%, rgba(120,80,200,0.03), transparent),
+                  var(--bg);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* Container */
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px}
+
+    /* Header / Nav */
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:46px;height:46px;border-radius:10px;background:
+      linear-gradient(135deg,var(--accent),#8a4ff7);
+      display:flex;align-items:center;justify-content:center;font-weight:800;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    .brand h1{font-size:16px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    .nav .links{display:flex;gap:12px;align-items:center}
+    .btn-outline{
+      padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+      background:transparent;color:var(--muted);font-size:13px;text-decoration:none;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent),#7c5bf7);
+      color:white;padding:10px 16px;border-radius:12px;border:0;font-weight:600;
+      box-shadow: 0 8px 26px rgba(79,141,247,0.12);text-decoration:none;
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:28px;padding:44px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      display:grid;grid-template-columns:1fr 360px;gap:26px;align-items:center;
+      backdrop-filter: blur(6px);
+    }
+    .hero-left h2{font-size:38px;margin:0 0 8px 0;letter-spacing:0.6px}
+    .hero-left .title-sub{font-size:20px;color:var(--muted);margin-bottom:16px}
+    .desc{color:var(--muted);margin-bottom:18px;max-width:640px}
+
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .play-thumb{
+      width:100%;height:220px;border-radius:12px;background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12)),
+      linear-gradient(90deg,#16202b,#0f1720);
+      position:relative;display:flex;align-items:center;justify-content:center;
+      overflow:hidden;border:1px solid rgba(255,255,255,0.03)
+    }
+    .play-thumb:before{
+      content:"";position:absolute;inset:0;background:
+      linear-gradient(180deg, rgba(0,0,0,0.14), transparent);
+    }
+    .play-icon{
+      width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,0.06);
+      display:flex;align-items:center;justify-content:center;font-size:28px;
+      border:1px solid rgba(255,255,255,0.05);cursor:pointer;
+      transition:transform .15s ease;
+    }
+    .play-icon:hover{transform:scale(1.05)}
+
+    /* Right column card */
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    }
+    .meta{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .meta .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#f77,#7c5bf7);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .meta h3{margin:0;font-size:16px}
+    .meta p{margin:0;color:var(--muted);font-size:13px}
+
+    .smalllist{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .pill{background:var(--glass);padding:8px 10px;border-radius:10px;font-size:13px;color:var(--muted)}
+
+    /* Sections */
+    section{margin-top:28px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .feature{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)
+    }
+    .feature h4{margin:0 0 6px 0}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .gallery div{height:90px;border-radius:10px;background:linear-gradient(135deg,#111827,#0b1220);display:flex;align-items:end;padding:8px;color:var(--muted);font-size:12px;border:1px solid rgba(255,255,255,0.03)}
+    
+    /* Schedule table */
+    table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden}
+    th,td{padding:12px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03);font-size:14px}
+    th{background:rgba(255,255,255,0.02);font-weight:600}
+
+    /* Footer */
+    footer{margin-top:36px;padding:18px;border-radius:12px;background:transparent;color:var(--muted);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .card{order:2}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:480px){
+      .gallery div{height:80px}
+      .brand h1{font-size:14px}
+      .hero-left h2{font-size:28px}
+      .hero-left .title-sub{font-size:16px}
+    }
+
+    /* small helpers */
+    .center{display:flex;align-items:center;justify-content:center}
+    a.naked{color:inherit;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo">XI</div>
+        <div>
+          <h1>Kelas XI.1</h1>
+          <p>Elvone.Word — Komunitas pembelajar</p>
+        </div>
+      </div>
+
+      <div class="links">
+        <a class="btn-outline" href="#about">Tentang</a>
+        <a class="btn-outline" href="#jadwal">Jadwal</a>
+        <a class="btn-primary" href="#galeri">Gabung Kelas</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero" role="banner">
+      <div class="hero-left">
+        <h2>Kelas XI.1<br><span style="color:var(--accent)">Elvone.Word</span></h2>
+        <div class="title-sub">Komunitas pembelajar yang solid, kreatif, dan inovatif.</div>
+        <p class="desc">Bersama menuju prestasi gemilang dan membangun masa depan yang cerah melalui pembelajaran kolaboratif, proyek keren, dan share ilmu.</p>
+
+        <div class="cta-row">
+          <a href="#jadwal" class="btn-primary">Jadwal Kelas</a>
+          <a href="#galeri" class="btn-outline">Lihat Galeri</a>
+        </div>
+
+        <div style="margin-top:18px;">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="min-width:220px" class="card">
+              <div style="font-size:13px;color:var(--muted)">Info Singkat</div>
+              <div style="font-weight:700;font-size:15px;margin-top:6px">Belajar, project, dan seru-seruan bareng</div>
+              <div class="smalllist" style="margin-top:12px">
+                <div class="pill">Offline & Online</div>
+                <div class="pill">Tugas Mingguan</div>
+                <div class="pill">Proyek Semester</div>
+              </div>
+            </div>
+
+            <div style="flex:1;min-width:220px">
+              <div class="play-thumb" id="videoThumb" aria-label="Play video showcase">
+                <!-- Simple SVG play icon -->
+                <div class="play-icon" id="playBtn" title="Putar video">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 3v18l15-9L5 3z" fill="rgba(255,255,255,0.9)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="Ringkasan kelas">
+        <div class="meta">
+          <div class="avatar">XI</div>
+          <div>
+            <h3>Elvone.Word</h3>
+            <p class="muted">Kelas XI.1 — Pembelajaran & Proyek</p>
+          </div>
+        </div>
+
+        <div style="margin-top:8px">
+          <div class="muted">Gabung sekarang untuk materi, tugas, dan dokumentasi kegiatan.</div>
+          <div class="smalllist" style="margin-top:12px">
+            <div class="pill">Google Drive</div>
+            <div class="pill">YouTube</div>
+            <div class="pill">Forum Diskusi</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <a class="btn-primary" href="#gabung">Gabung Kelas</a>
+          <a class="btn-outline" href="#kontak">Kontak Guru</a>
+        </div>
+      </aside>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <h3 style="margin:0">Tentang Kelas</h3>
+        <div class="muted">Belajar bareng, proyek tim, dan sharing skill setiap minggu.</div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px">
+        <div class="feature">
+          <h4>Materi Lengkap</h4>
+          <div class="muted">Dokumen, slide, dan rekaman pelajaran tersusun rapi.</div>
+        </div>
+        <div class="feature">
+          <h4>Tugas & Proyek</h4>
+          <div class="muted">Tugas mingguan & proyek kelompok tiap semester.</div>
+        </div>
+        <div class="feature">
+          <h4>Komunitas</h4>
+          <div class="muted">Diskusi, konsultasi, dan sesi sharing.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jadwal -->
+    <section id="jadwal">
+      <h3>Jadwal Pelajaran</h3>
+      <p class="muted" style="margin-top:6px">Jadwal contoh — Lo bisa ganti sesuai kelas lo.</p>
+
+      <div style="margin-top:12px;overflow:auto">
+        <table>
+          <thead>
+            <tr><th>Hari</th><th>Mapel</th><th>Jam</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Senin</td><td>Matematika</td><td>07:00 - 09:00</td></tr>
+            <tr><td>Selasa</td><td>Bahasa Inggris</td><td>09:30 - 11:00</td></tr>
+            <tr><td>Rabu</td><td>IPA</td><td>13:00 - 14:30</td></tr>
+            <tr><td>Kamis</td><td>Bahasa Indonesia</td><td>10:00 - 11:30</td></tr>
+            <tr><td>Jumat</td><td>PKN / Ekstrakurikuler</td><td>08:00 - 10:00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="galeri">
+      <h3>Galeri Kegiatan</h3>
+      <p class="muted">Dokumentasi kegiatan kelas & project.</p>
+
+      <div class="gallery" style="margin-top:12px">
+        <div>Foto Kegiatan 1</div>
+        <div>Foto Kegiatan 2</div>
+        <div>Foto Kegiatan 3</div>
+        <div>Foto Kegiatan 4</div>
+        <div>Foto Kegiatan 5</div>
+        <div>Foto Kegiatan 6</div>
+      </div>
+    </section>
+
+    <!-- Gabung / CTA -->
+    <section id="gabung">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1">
+          <h3>Gabung Kelas</h3>
+          <p class="muted">Klik tombol di bawah untuk mendaftar atau kirim pesan ke guru.</p>
+        </div>
+        <div style="display:flex;gap:8px">
+          <a class="btn-primary" href="mailto:guru@example.com">Daftar via Email</a>
+          <a class="btn-outline" href="#kontak">Atau Kontak</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak">
+      <h3>Kontak</h3>
+      <p class="muted">Kalo ada perlu, Hubungi Gw!</p>
+      <footer>
+        <div>
+          <div style="font-weight:700">Wali Kelas • Pak/Ipul</div>
+          <div class="muted" style="margin-top:6px">Email: guru@example.com • Telp: 0812-xxxx-xxxx</div>
+        </div>
+
+        <div style="text-align:right">
+          <div class="muted">© <span id="year"></span> Kelas XI.1 — Elvone.Word</div>
+          <div style="margin-top:8px"><a class="naked" href="#gabung">Yoi, Gabung Sekarang! ✨</a></div>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Simple Modal Video (light) -->
+  <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(3,6,10,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;z-index:9999">
+    <div style="width:90%;max-width:900px;background:#081018;border-radius:12px;padding:8px">
+      <div style="display:flex;justify-content:flex-end">
+        <button id="closeModal" style="background:transparent;border:0;color:var(--muted);font-size:20px;padding:8px;cursor:pointer">✕</button>
+      </div>
+      <div style="position:relative;padding-top:56.25%">
+        <iframe id="ytplayer" src="" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // small interactivity
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const playBtn = document.getElementById('playBtn');
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('closeModal');
+    const yt = document.getElementById('ytplayer');
+
+    playBtn && playBtn.addEventListener('click', () => {
+      // Ganti ID video YouTube disini kalo perlu
+      const ytId = 'dQw4w9WgXcQ'; // contoh (ganti dengan video kelas / presentasi)
+      yt.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0';
+      modal.style.display = 'flex';
+    });
+
+    closeModal && closeModal.addEventListener('click', () => {
+      yt.src = '';
+      modal.style.display = 'none';
+    });
+
+    // close when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) { yt.src=''; modal.style.display='none'; }
+    });
+  </script>
+</body>
+</html>
